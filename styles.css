@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+/*
+  GLOBAL STYLES
+*/
+
+html {
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  background-color: grey;
+  min-height: 100%;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+/*
+  BUTTON STYLES
+*/
+
+.btn {
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.btn-alt {
+  border: 1px solid #fff;
+  padding: 10px 30px;
+}
+
+.btn-alt:hover {
+  background: #fff;
+  color: lightgray;
+}
+
+.btn-default {
+  border: 0;
+  background: slategray;
+  padding: 11px 30px;
+  font-size: 14px;
+}
+
+.btn-default:hover {
+  background: lightslategray;
+}
+
+/*
+  HEADER
+*/
+
+header {
+  height: 8em;
+  background: url('https://images.unsplash.com/photo-1530508777238-14544088c3ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+  background-size:cover;
+  background-attachment:fixed;
+  display:flex;
+  flex-direction:column;
+}
+
+.logo {
+  color: darkslategray;
+  font-family: 'Lobster', cursive;
+  font-size: 3em;
+  margin-bottom: 0;
+}
+
+.tagline {
+  color: darkgray;
+  font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+  margin-top: -10px;
+}
+
+a {
+  text-decoration: none;
+  color:  white;
+}
+
+a:hover {
+  color: lightgray;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+/*
+  LATEST TWEETS SECTION
+*/
+
+.latest-container {
+  background-color: black;
+  background-size: cover;
+  border-radius: 25px;
+  margin: 0px 20px;
+  width: 500px;
+}
+
+.latest-container > h1 {
+  color: white;
+  font-family: 'Lobster', cursive;
+  font-size: 1.5em;
+  margin-bottom: 2px;
+}
+
+.latest-container > button {
+  margin-top: -1em;
+  margin-bottom: 1em;
+}
+
+.tweetDiv {
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: -2px;
+  margin: 10px;
+  overflow: auto;
+}
+
+.tweets > h2 {
+  color: white;
+  margin-bottom: 0;
+}
+
+.tweet {
+  background-color: white;
+  border-radius: 15px;
+  margin: auto;
+  width: 90%;
+}
+
+.tweet h4 {
+  color: black;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.tweet h4.user-link {
+  color: darkslategray;
+  margin-top: 8px;
+}
+
+.tweet h4.user-link:hover {
+  color: #a9b2b9;
+}
+
+.tweet h4.user-link:before{
+	content: "@";
+}
+
+.tweet h4.user-link:after{
+	content: ":";
+}
+
+.tweet span.created-time {
+  color: darkslategray;
+  font-size: 12px;
+}
+
+/*
+  NEW TWEET SECTION
+*/
+
+#tweet-form {
+  width: 500px;
+  padding: 20px;
+}
+
+#newTweetScroll {
+  position: fixed; /* Fixed/sticky position */
+  display: block;
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: 3px solid black; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: slategray; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+.new-tweet {
+  font-family: 'Lobster', cursive;
+  font-size: 3em;
+  color: white;
+  margin: 0;
+}
+
+input,
+select,
+textarea {
+  font: 300 16px/22px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tweet-group label {
+  color: lightgray;
+  font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.tweet-group input,
+.tweet-group select,
+.tweet-group textarea {
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  color: #888;
+  display: block;
+
+  padding: 5px 8px;
+}
+
+.tweet-group input,
+.tweet-group textarea {
+  width: 95%;
+  margin: auto;
+}
+
+.tweet-group select {
+  height: 34px;
+  width: 100vw;
+}
+
+.tweet-group textarea {
+  height: 78px;
+}
+
+/*
+  FOOTER
+*/
+small {
+  color: white;
+}
+
+footer {
+  height: 50px;
+  background: url('https://images.unsplash.com/photo-1530508777238-14544088c3ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+  background-size:cover;
+  background-attachment:fixed;
+  display:flex;
+  flex-direction:column;
+}

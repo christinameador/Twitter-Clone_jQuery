@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="jquery.js"></script>
+    <script src="dataGenerator.js"></script>
+  </head>
+  <body>
+
+    <header>
+      <div class='center'>
+        <h1 class='logo'>
+          <a href='index.html'>Twittler</a>
+        </h1>
+        <h3 class='tagline'>Time to get Social</h3>
+      </div>
+    </header>
+
+    <div class="container">
+      <form id="tweet-form" action="#" method="post">
+        <fieldset class="tweet-group">
+          <legend><h1 class="new-tweet">New Tweet</h1></br></legend>
+          <label>
+            Twittler Handle:
+            <input id="username" type="text" name="username" placeholder="Enter Username" required>
+          </label>
+          <br>
+          <label>
+            Tweet:
+            <textarea id="tweet-message" name="tweet" placeholder="What's On Your Mind?" required></textarea>
+          </label>
+        </fieldset>
+        <div class='submit-button center'>
+          <input id="submit-tweet" class="btn btn-default" type="submit" name="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+
+  </br>
+
+        <section class="container">
+          <div class="latest-container center">
+            <h1>Latest Tweets:</h1>
+            <div class="tweets">
+            </div>
+            </br>
+            <button class="btn btn-default" name="load">Load New Tweets</button>
+          </div>
+        </section>
+
+        <br>
+        <br>
+
+        <button onclick="scrollBottom()" id="newTweetScroll" title="Add a Tweet">Add a Tweet</button>
+
+    <footer>
+      <small class="center">Created By Christina Meador <br> © Hack Reactor 2020</small>
+    </footer>
+
+    <script>
+
+      $(document).ready(function(){
+
+        // Function to load new tweets
+        var loadTweets = function() {
+          var $tweetDiv = $('div.tweets');
+          $tweetDiv.html('');
+          var index = streams.home.length - 1;
+          while(index >= 0) {
+            var tweet = streams.home[index];
+            var $tweet = $('<div class="tweet"></div>');
+            $tweet.html('<h4 class="user-link">' + tweet.user + '</h4>"'
+              + tweet.message.trim() + '"</br><span class="created-time timeago">'
+              + timeSince(tweet.created_at) + '</span>');
+            $tweet.appendTo($tweetDiv);
+            index -= 1;
+          }
+          document.documentElement.scrollTop = 0;
+        };
+
+        // Function to show user history when username is clicked
+        var selectUser = function(user) {
+          var $tweetDiv = $('div.tweets');
+          $tweetDiv.html('');
+          $tweetDiv.html('<h2>@' + user + '</h2></br>');
+          var index = streams.users[user].length - 1;
+          while(index >= 0) {
+            var tweet = streams.users[user][index];
+            var $tweet = $('<div class="tweet"></div>');
+            $tweet.html('<h4 class="user-link">' + tweet.user + '</h4>"'
+              + tweet.message.trim() + '"</br><span class="created-time timeago">'
+              + tweet.created_at + '</span>');
+            $tweet.appendTo($tweetDiv);
+            index -= 1;
+          }
+        };
+
+        // Function to add a new tweet and create a global variable containing visitor's username
+        var addTweet = function() {
+          var user = $('#username').val();
+          var message = $('#tweet-message').val();
+          if (streams.users[user] === undefined) {
+            streams.users[user] = [];
+          }
+          window.visitor = user;
+          writeTweet(message);
+
+          loadTweets();
+        }
+
+        // Calculating time passage
+        var timeSince = function(timeStamp) {
+          var now = new Date(),
+          secondsPast = (now.getTime() - timeStamp.getTime()) / 1000;
+          if(secondsPast < 60){
+            return 'Less than a minute ago';
+          }
+          if(secondsPast < 3600){
+            var minutes = parseInt(secondsPast/60);
+            if (minutes === 1) {
+              return parseInt(secondsPast/60) + ' minunte ago';
+            }
+            return parseInt(secondsPast/60) + ' minuntes ago';
+          }
+          if(secondsPast <= 86400){
+            var hours = parseInt(secondsPast/60);
+            if (hours === 1) {
+              return parseInt(secondsPast/60) + ' hour ago';
+            }
+            return parseInt(secondsPast/3600) + ' hours ago';
+          }
+          if(secondsPast > 86400){
+              day = timeStamp.getDate();
+              month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ","");
+              year = timeStamp.getFullYear() == now.getFullYear() ? "" :  " "+timeStamp.getFullYear();
+              return day + " " + month + year;
+          }
+        };
+
+        // Event handlers for buttons
+        $("button").on("click", loadTweets);
+        $(document).on("click", "h4.user-link", function() {
+          selectUser($(this).text());
+        });
+        $("#tweet-form").on("submit", function(event) {
+          event.preventDefault();
+          addTweet();
+        });
+
+        loadTweets();
+
+      });
+
+      // Function to scroll to New Tweet Form
+      bottomScrollBtn = document.getElementById("newTweetScroll");
+
+      window.onscroll = function() {scrollFunction()};
+
+      function scrollFunction() {
+        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+          bottomScrollBtn.style.display = "block";
+        } else {
+          bottomScrollBtn.style.display = "none";
+        }
+      }
+
+      function topFunction() {
+        document.body.scrollTop = document.body.scrollHeight;
+        document.documentElement.scrollTop = document.documentElement.scrollTop = 0;
+      }
+
+    </script>
+  </body>
+</html>
